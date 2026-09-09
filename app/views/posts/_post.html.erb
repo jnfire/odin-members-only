@@ -9,4 +9,10 @@
     <%= post.body %>
   </div>
 
+  <% if user_signed_in? %>
+    <div>
+      <%= post.user.name %> <%= post.user.surname %>
+    </div>
+  <% end %>
+
 </div>
