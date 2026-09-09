@@ -1,10 +1,388 @@
 /*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
+ * Odin Members Only — design tokens & styles.
+ * Single manifest file served by Propshaft (see app/views/layouts/application.html.erb).
  */
+
+/* ---------- Design tokens ---------- */
+:root {
+  --color-bg: #f6f4ef;
+  --color-surface: #ffffff;
+  --color-border: #e4ddd0;
+  --color-text: #2b2620;
+  --color-text-muted: #6f6656;
+  --color-accent: #7a4f2b;
+  --color-accent-hover: #5f3c20;
+  --color-accent-contrast: #fffaf1;
+  --color-danger: #a33b2c;
+  --color-danger-bg: #fbeceb;
+  --color-success: #2f6b45;
+  --color-success-bg: #eaf5ee;
+
+  --radius: 10px;
+  --shadow-sm: 0 1px 2px rgba(43, 38, 32, 0.06);
+  --shadow-md: 0 6px 16px rgba(43, 38, 32, 0.08);
+
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1c1a17;
+    --color-surface: #262320;
+    --color-border: #3a352d;
+    --color-text: #efe9de;
+    --color-text-muted: #a89e8c;
+    --color-accent: #d8a15f;
+    --color-accent-hover: #e6b579;
+    --color-accent-contrast: #241d12;
+    --color-danger: #e6867a;
+    --color-danger-bg: #3a2320;
+    --color-success: #7fc596;
+    --color-success-bg: #1f2f24;
+  }
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  line-height: 1.25;
+  margin: 0 0 0.5em;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+/* ---------- Layout ---------- */
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.site-header__inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-header__brand {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.site-header__brand:hover {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.95rem;
+}
+
+.site-header__user {
+  color: var(--color-text-muted);
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.page-intro {
+  margin-bottom: 2rem;
+}
+
+.page-intro p {
+  color: var(--color-text-muted);
+}
+
+/* ---------- Buttons ---------- */
+.button,
+input[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.55rem 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.button:hover,
+input[type="submit"]:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-accent-contrast);
+  text-decoration: none;
+}
+
+.button--ghost {
+  background: transparent;
+  color: var(--color-accent);
+}
+
+.button--ghost:hover {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.button--danger {
+  border-color: var(--color-danger);
+  background: transparent;
+  color: var(--color-danger);
+}
+
+.button--danger:hover {
+  background: var(--color-danger);
+  color: var(--color-accent-contrast);
+}
+
+/* ---------- Forms ---------- */
+.field {
+  margin-bottom: 1.1rem;
+}
+
+.field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+  color: var(--color-text-muted);
+}
+
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="password"],
+.field textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  transition: border-color 0.15s ease;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.field textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.field--checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.field--checkbox label {
+  margin: 0;
+}
+
+.field-hint {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  margin: 0.15rem 0 0.35rem;
+}
+
+.actions {
+  margin-top: 1.25rem;
+}
+
+/* ---------- Flash & errors ---------- */
+.flash {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.flash--notice {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.flash--alert {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+
+.error-explanation {
+  background: var(--color-danger-bg);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-danger);
+}
+
+.error-explanation h2 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.error-explanation ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+}
+
+.card + .card {
+  margin-top: 1.25rem;
+}
+
+.card h2 {
+  font-size: 1.1rem;
+}
+
+/* ---------- Posts ---------- */
+.new-post {
+  margin-bottom: 2.5rem;
+}
+
+.posts-section h2 {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+}
+
+.post {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.25rem 1.5rem;
+}
+
+.post + .post {
+  margin-top: 1rem;
+}
+
+.post__title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  margin: 0 0 0.4rem;
+}
+
+.post__body {
+  margin: 0 0 0.75rem;
+  white-space: pre-wrap;
+}
+
+.post__author {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.posts-empty {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ---------- Auth pages (Devise) ---------- */
+.auth {
+  min-height: calc(100vh - 4rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+}
+
+.auth__card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+}
+
+.auth__card h2 {
+  font-size: 1.35rem;
+  margin-bottom: 1.25rem;
+}
+
+.auth__links {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.auth__back {
+  display: block;
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.auth__danger-zone {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.auth__danger-zone h3 {
+  font-size: 1rem;
+  color: var(--color-danger);
+}

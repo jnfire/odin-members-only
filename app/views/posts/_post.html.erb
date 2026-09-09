@@ -1,18 +1,8 @@
-<div id="<%= dom_id post %>">
-  <div>
-    <strong>Name:</strong>
-    <%= post.name %>
-  </div>
-
-  <div>
-    <strong>Body:</strong>
-    <%= post.body %>
-  </div>
+<div id="<%= dom_id post %>" class="post">
+  <h3 class="post__title"><%= post.name %></h3>
+  <p class="post__body"><%= post.body %></p>
 
   <% if user_signed_in? %>
-    <div>
-      <%= post.user.name %> <%= post.user.surname %>
-    </div>
+    <p class="post__author">Por <%= post.user.name %> <%= post.user.surname %></p>
   <% end %>
-
 </div>

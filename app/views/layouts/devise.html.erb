@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render "layouts/head" %>
+  </head>
+
+  <body>
+    <main class="auth">
+      <div class="auth__card">
+        <%= render "shared/flash" %>
+        <%= yield %>
+        <%= link_to "← Volver a Members Only", root_path, class: "auth__back" %>
+      </div>
+    </main>
+  </body>
+</html>
