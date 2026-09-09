@@ -2,15 +2,22 @@
 
 <% content_for :title, "Posts" %>
 
-<h1>Posts</h1>
+<h1>Members Only</h1>
+<p>
+  This is a members-only site. You must be logged in to view the content. If you are not logged in, please <%= link_to "log in", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %>.
+</p>
 
 <div id="posts">
-  <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
+  <% if user_signed_in? %>
+    <section>
+      <h2>New story</h2>
+      <%= render "form", post: @post %>
+    </section>
   <% end %>
+  <section>
+    <h2>All stories</h2>
+    <% @posts.each do |post| %>
+      <%= render post %>
+    <% end %>
+  </section>
 </div>
-
-<%= link_to "New post", new_post_path %>

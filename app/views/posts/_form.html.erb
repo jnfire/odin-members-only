@@ -1,4 +1,6 @@
 <%= form_with(model: post) do |form| %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
   <% if post.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
