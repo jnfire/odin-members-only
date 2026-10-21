@@ -6,7 +6,7 @@ gem "rails", "~> 8.1.3", ">= 8.1.3.1"
 gem "propshaft"
 # Pin below 3.0: json 3.0's JSON.parse(source, **kwargs) breaks ActiveSupport::JSON.decode,
 # which still calls JSON.parse(json, options_hash) positionally (session cookie decryption fails).
-gem "json", "~> 2.21"
+gem "json", "~> 3.1"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", ">= 2.1"
 # Use the Puma web server [https://github.com/puma/puma]
